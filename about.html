@@ -1,220 +1,41 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О проекте — День</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .about-grid {
-            max-width: var(--container);
-            margin: 2rem auto 3rem;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1.4fr 1fr;
-            gap: 1.5rem;
-            align-items: start;
-        }
-
-        @media (max-width: 900px) {
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .content {
-            padding: 2.5rem 2.2rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            animation: fadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.15s both;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 15%;
-            right: 15%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            border-radius: 100px;
-        }
-
-        .content h2 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin: 2rem 0 1rem;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-
-        .content h2:first-child {
-            margin-top: 0;
-        }
-
-        .content h2 .icon-box {
-            width: 30px;
-            height: 30px;
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(22, 163, 74, 0.1);
-            color: var(--accent);
-        }
-
-        .content h2 svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .content p {
-            font-size: 1rem;
-            color: var(--muted-2);
-            margin-bottom: 1rem;
-        }
-
-        .content ul {
-            list-style: none;
-            padding: 0;
-            margin-bottom: 1.5rem;
-        }
-
-        .content ul li {
-            padding: 0.75rem 0 0.75rem 1.9rem;
-            position: relative;
-            font-size: 0.95rem;
-            color: var(--muted-2);
-            border-bottom: 1px solid var(--border);
-            transition: padding-left 0.25s;
-        }
-
-        .content ul li:hover {
-            padding-left: 2.2rem;
-        }
-
-        .content ul li:last-child {
-            border-bottom: none;
-        }
-
-        .content ul li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .content ul li strong {
-            color: var(--text);
-        }
-
-        .highlight {
-            padding: 1.5rem 1.7rem;
-            background: rgba(22, 163, 74, 0.05);
-            border: 1px solid rgba(22, 163, 74, 0.15);
-            border-radius: 14px;
-            font-size: 0.95rem;
-            color: #14532d;
-            margin: 1.5rem 0;
-        }
-
-        .highlight strong {
-            color: var(--accent);
-        }
-
-        .side-panel {
-            padding: 2.2rem;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            animation: fadeUp 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
-            box-shadow: var(--shadow);
-        }
-
-        .side-panel h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-
-        .side-panel h3 .icon-box {
-            width: 30px;
-            height: 30px;
-            border-radius: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(22, 163, 74, 0.1);
-            color: var(--accent);
-        }
-
-        .side-panel h3 svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .features {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .feature {
-            display: flex;
-            gap: 1rem;
-            padding: 1.1rem 1.2rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
-
-        .feature:hover {
-            border-color: var(--border-hover);
-            transform: translateX(3px);
-            background: rgba(22, 163, 74, 0.03);
-        }
-
-        .feature .bullet {
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            margin-top: 8px;
-            flex-shrink: 0;
-        }
-
-        .feature span {
-            font-size: 0.92rem;
-            color: var(--muted-2);
-        }
+        .about-grid { max-width: var(--container); margin: 2rem auto 3rem; padding: 0 2rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; align-items: start; }
+        @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
+        .content { padding: 2.5rem 2.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 22px; animation: fadeUp 0.9s 0.15s both; box-shadow: var(--shadow); }
+        .content h2 { font-size: 1.2rem; font-weight: 700; margin: 2rem 0 1rem; color: var(--accent); display: flex; align-items: center; gap: 0.7rem; }
+        .content h2:first-child { margin-top: 0; }
+        .content h2 .icon-box { width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: rgba(22,163,74,0.1); color: var(--accent); }
+        .content h2 svg { width: 16px; height: 16px; }
+        .content p { font-size: 1rem; color: var(--muted-2); margin-bottom: 1rem; }
+        .content ul { list-style: none; padding: 0; margin-bottom: 1.5rem; }
+        .content ul li { padding: 0.75rem 0 0.75rem 1.9rem; position: relative; font-size: 0.95rem; color: var(--muted-2); border-bottom: 1px solid var(--border); }
+        .content ul li:last-child { border-bottom: none; }
+        .content ul li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+        .content ul li strong { color: var(--text); }
+        .highlight { padding: 1.5rem 1.7rem; background: rgba(22,163,74,0.05); border: 1px solid rgba(22,163,74,0.15); border-radius: 14px; font-size: 0.95rem; color: #14532d; margin: 1.5rem 0; }
+        .highlight strong { color: var(--accent); }
+        .side-panel { padding: 2.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 22px; animation: fadeUp 0.9s 0.3s both; box-shadow: var(--shadow); }
+        .side-panel h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1.3rem; display: flex; align-items: center; gap: 0.7rem; }
+        .side-panel h3 .icon-box { width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center; background: rgba(22,163,74,0.1); color: var(--accent); }
+        .side-panel h3 svg { width: 16px; height: 16px; }
+        .features { display: flex; flex-direction: column; gap: 0.8rem; }
+        .feature { display: flex; gap: 1rem; padding: 1.1rem 1.2rem; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; }
+        .feature .bullet { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
+        .feature span { font-size: 0.92rem; color: var(--muted-2); }
     </style>
-    <!-- Сюда вставите код счетчика LiveInternet -->
 </head>
-
 <body>
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 
     <nav>
-        <div class="logo">
-            <span class="logo-dot"></span>
-            <span class="logo-text">день<span>.</span></span>
-        </div>
+        <div class="logo"><span class="logo-dot"></span><span class="logo-text">день<span>.</span></span></div>
         <div class="nav-links">
             <a href="index.html">Главная</a>
             <a href="water.html">Вода</a>
@@ -231,84 +52,37 @@
         <header class="hero">
             <div class="badge">О проекте</div>
             <h1>Проект <em>«День»</em></h1>
-            <p>Простой сайт-трекер без регистрации и рекламы. Помогает следить за тремя базовыми привычками: вода, сон,
-                движение.</p>
+            <p>Простой сайт-трекер без регистрации и рекламы. Помогает следить за тремя базовыми привычками.</p>
         </header>
 
         <section class="about-grid">
             <div class="content">
-                <h2>
-                    <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="12" y1="16" x2="12" y2="12" />
-                            <line x1="12" y1="8" x2="12.01" y2="8" />
-                        </svg></div>
-                    Зачем этот сайт
-                </h2>
-                <p>Большинство приложений для здоровья требуют регистрации, подписок и разрешений. Здесь ничего этого
-                    нет. Просто открыл — отметил — закрыл. Все данные хранятся в твоём браузере и никуда не
-                    отправляются.</p>
-
-                <h2>
-                    <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="3" width="7" height="7" />
-                            <rect x="14" y="3" width="7" height="7" />
-                            <rect x="14" y="14" width="7" height="7" />
-                            <rect x="3" y="14" width="7" height="7" />
-                        </svg></div>
-                    Что внутри
-                </h2>
+                <h2><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>Зачем этот сайт</h2>
+                <p>Большинство приложений для здоровья требуют регистрации, подписок и разрешений. Здесь ничего этого нет. Просто открыл — отметил — закрыл. Данные хранятся только в твоём браузере.</p>
+                <h2><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>Что внутри</h2>
                 <ul>
-                    <li><strong>Главная</strong> — трекер трёх привычек. Отмечай каждый день, видь прогресс.</li>
-                    <li><strong>Вода</strong> — калькулятор нормы по весу и активности, плюс трекер стаканов.</li>
-                    <li><strong>Сон</strong> — расчёт времени сна по циклам. Во сколько лечь, чтобы встать легко.</li>
-                    <li><strong>Активность</strong> — калькулятор цели по шагам и советы, как добавить движение.</li>
-                    <li><strong>Статистика</strong> — графики прогресса за неделю и текущая серия дней.</li>
-                    <li><strong>Награды</strong> — значки за достижения. Открываются по мере выполнения.</li>
-                    <li><strong>Мотивация</strong> — карточки с цитатами и простыми мыслями.</li>
+                    <li><strong>Главная</strong> — трекер трёх привычек.</li>
+                    <li><strong>Вода</strong> — калькулятор нормы и трекер стаканов.</li>
+                    <li><strong>Сон</strong> — расчёт циклов сна.</li>
+                    <li><strong>Активность</strong> — цель по шагам.</li>
+                    <li><strong>Статистика</strong> — графики прогресса.</li>
+                    <li><strong>Награды</strong> — значки за достижения.</li>
+                    <li><strong>Мотивация</strong> — цитаты и напоминания.</li>
                 </ul>
-
-
-
-                <div class="highlight">
-                    <strong>Важно:</strong> этот сайт — не медицинский инструмент. Он не заменяет консультацию врача.
-                    Все расчёты приблизительные и основаны на общих рекомендациях.
-                </div>
+                <h2><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>Технологии</h2>
+                <p>Чистый HTML, CSS и JavaScript. Без фреймворков. Данные — localStorage.</p>
+                <div class="highlight"><strong>Важно:</strong> этот сайт — не медицинский инструмент. Все расчёты приблизительные.</div>
             </div>
 
             <div class="side-panel">
-                <h3>
-                    <div class="icon-box">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                            <path d="M2 17l10 5 10-5" />
-                            <path d="M2 12l10 5 10-5" />
-                        </svg>
-                    </div>
-                    Ключевые принципы
-                </h3>
+                <h3><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>Ключевые принципы</h3>
                 <div class="features">
-                    <div class="feature">
-                        <div class="bullet"></div><span>Без регистрации и лишних данных.</span>
-                    </div>
-                    <div class="feature">
-                        <div class="bullet"></div><span>Данные не покидают браузер.</span>
-                    </div>
-                    <div class="feature">
-                        <div class="bullet"></div><span>Никаких подписок и рекламы.</span>
-                    </div>
-                    <div class="feature">
-                        <div class="bullet"></div><span>Простой интерфейс без лишних настроек.</span>
-                    </div>
-                    <div class="feature">
-                        <div class="bullet"></div><span>Работает офлайн после первой загрузки.</span>
-                    </div>
-                    <div class="feature">
-                        <div class="bullet"></div><span>Открытый код — можно посмотреть и изучить.</span>
-                    </div>
+                    <div class="feature"><div class="bullet"></div><span>Без регистрации и лишних данных.</span></div>
+                    <div class="feature"><div class="bullet"></div><span>Данные не покидают браузер.</span></div>
+                    <div class="feature"><div class="bullet"></div><span>Никаких подписок и рекламы.</span></div>
+                    <div class="feature"><div class="bullet"></div><span>Простой интерфейс без лишних настроек.</span></div>
+                    <div class="feature"><div class="bullet"></div><span>Работает офлайн после первой загрузки.</span></div>
+                    <div class="feature"><div class="bullet"></div><span>Открытый код — можно посмотреть и изучить.</span></div>
                 </div>
             </div>
         </section>
@@ -317,6 +91,18 @@
     <footer>
         День · трекер привычек · 2026
     </footer>
-</body>
 
+    <div style="text-align: center; padding: 1.5rem 0 2rem; border-top: 1px solid #eae6de;">
+        <!--LiveInternet counter--><a href="https://www.liveinternet.ru/click"
+        target="_blank"><img id="licntFA1E" width="88" height="31" style="border:0"
+        title="LiveInternet: показано число просмотров и посетителей за 24 часа"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+        alt=""/></a><script>(function(d,s){d.getElementById("licntFA1E").src=
+        "https://counter.yadro.ru/hit?t52.13;r"+escape(d.referrer)+
+        ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+        (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+        ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
+        (document,screen)</script><!--/LiveInternet-->
+    </div>
+</body>
 </html>
