@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Активность — сколько шагов</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --accent: #dc2626;
+            --accent-2: #d97706;
+        }
+
+        .result-box {
+            margin-top: 1.8rem;
+            padding: 1.8rem;
+            background: linear-gradient(135deg, rgba(220, 38, 38, 0.05), rgba(217, 119, 6, 0.04));
+            border: 1px solid rgba(220, 38, 38, 0.15);
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .result-box .label {
+            font-size: 0.72rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+
+        .result-box .value {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1;
+            color: var(--accent);
+        }
+
+        .result-box .sub {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-top: 0.6rem;
+        }
+
+        .tips {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .tip {
+            display: flex;
+            gap: 1rem;
+            padding: 1.3rem 1.4rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            transition: all 0.3s;
+        }
+
+        .tip:hover {
+            border-color: var(--border-hover);
+            transform: translateX(4px);
+            background: rgba(220, 38, 38, 0.03);
+        }
+
+        .tip .num {
+            width: 36px;
+            height: 36px;
+            background: rgba(220, 38, 38, 0.08);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.82rem;
+            flex-shrink: 0;
+        }
+
+        .tip .tip-text strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .tip .tip-text span {
+            font-size: 0.87rem;
+            color: var(--muted);
+        }
+    </style>
+    <!-- Сюда вставите код счетчика LiveInternet -->
+</head>
+
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <span class="logo-dot"></span>
+            <span class="logo-text">день<span>.</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="water.html">Вода</a>
+            <a href="sleep.html">Сон</a>
+            <a href="move.html" class="active">Активность</a>
+            <a href="stats.html">Статистика</a>
+            <a href="achievements.html">Награды</a>
+            <a href="motivation.html">Мотивация</a>
+            <a href="about.html">О проекте</a>
+        </div>
+    </nav>
+
+    <div class="content-wrap">
+        <header class="hero">
+            <div class="badge">Калькулятор шагов</div>
+            <h1>Сколько шагов <em>тебе подходит</em></h1>
+            <p>10 000 шагов — не универсальная цель. Введи свои данные — увидишь норму, которая подойдёт именно тебе.
+            </p>
+        </header>
+
+        <section class="two-col">
+            <div class="panel">
+                <h2>
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg>
+                    </div>
+                    Персональная цель
+                </h2>
+
+                <div class="field">
+                    <label for="age">Возраст</label>
+                    <input type="number" id="age" value="30" min="10" max="100">
+                </div>
+
+                <div class="field">
+                    <label for="level">Текущий уровень активности</label>
+                    <select id="level">
+                        <option value="low">Мало двигаюсь (менее 5000)</option>
+                        <option value="mid" selected>Средне (5000–8000)</option>
+                        <option value="high">Много (более 8000)</option>
+                    </select>
+                </div>
+
+                <div class="result-box">
+                    <div class="label">Твоя дневная цель</div>
+                    <div class="value" id="target">7 500</div>
+                    <div class="sub" id="targetNote">Это примерно 5 км пешком за день</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                    </div>
+                    Как добавить движение
+                </h2>
+                <div class="tips">
+                    <div class="tip">
+                        <div class="num">01</div>
+                        <div class="tip-text">
+                            <strong>Выйди на остановку раньше</strong>
+                            <span>Добавит около 1000–1500 шагов в день без усилий.</span>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <div class="num">02</div>
+                        <div class="tip-text">
+                            <strong>Говори по телефону стоя</strong>
+                            <span>Простой способ добавить движения, если много звонков.</span>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <div class="num">03</div>
+                        <div class="tip-text">
+                            <strong>Короткая прогулка вечером</strong>
+                            <span>15 минут после ужина — это ещё 1500–2000 шагов.</span>
+                        </div>
+                    </div>
+                    <div class="tip">
+                        <div class="num">04</div>
+                        <div class="tip-text">
+                            <strong>Лестница вместо лифта</strong>
+                            <span>Один этаж — около 20 шагов. Пять этажей — уже 100.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-head">
+            <h2>Сколько это в шагах</h2>
+            <p>Ориентировочные цели по возрасту</p>
+        </section>
+
+        <section class="tools">
+            <div class="tool">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+                <span class="num">18–40 лет</span>
+                <h3>8 000 – 10 000</h3>
+                <p>Базовый уровень для активного возраста. Сюда входит ходьба по делам и короткие прогулки.</p>
+            </div>
+            <div class="tool">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+                <span class="num">40–60 лет</span>
+                <h3>7 000 – 9 000</h3>
+                <p>Немного меньше, но регулярно. Главное — не разово, а каждый день по чуть-чуть.</p>
+            </div>
+            <div class="tool">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+                <span class="num">60+ лет</span>
+                <h3>6 000 – 8 000</h3>
+                <p>Для старшего возраста важнее регулярность, чем количество. Прогулка каждый день.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        День · трекер привычек · 2026 · <a href="about.html">О проекте</a>
+    </footer>
+
+    <script>
+        const ageInput = document.getElementById('age');
+        const levelSelect = document.getElementById('level');
+        const targetEl = document.getElementById('target');
+        const targetNote = document.getElementById('targetNote');
+
+        function calculate() {
+            const age = parseInt(ageInput.value) || 30;
+            const level = levelSelect.value;
+            let base = 8000;
+            if (age > 50) base = 7000;
+            if (age > 65) base = 6000;
+            if (age < 18) base = 10000;
+            let target = base;
+            if (level === 'low') target = Math.round(base * 0.85);
+            if (level === 'high') target = Math.round(base * 1.15);
+            target = Math.round(target / 500) * 500;
+            targetEl.textContent = target.toLocaleString('ru-RU');
+            const km = (target * 0.7 / 1000).toFixed(1);
+            targetNote.textContent = 'Это примерно ' + km + ' км пешком за день';
+        }
+
+        ageInput.addEventListener('input', calculate);
+        levelSelect.addEventListener('change', calculate);
+        calculate();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сон — во сколько лечь</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --accent: #7c3aed;
+            --accent-2: #2563eb;
+        }
+
+        .times {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .time-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.8rem 1.4rem;
+            text-align: center;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.06), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .time-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 14px 30px rgba(124, 58, 237, 0.12);
+        }
+
+        .time-card:hover::before {
+            opacity: 1;
+        }
+
+        .time-card .time {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -1px;
+            font-variant-numeric: tabular-nums;
+            position: relative;
+        }
+
+        .time-card .cycles {
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 0.4rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .time-card .note {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 0.5rem;
+            position: relative;
+        }
+
+        .info {
+            padding: 1.5rem;
+            background: rgba(124, 58, 237, 0.05);
+            border: 1px solid rgba(124, 58, 237, 0.15);
+            border-radius: 14px;
+            font-size: 0.92rem;
+            color: #5b21b6;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .info svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            color: var(--accent);
+            margin-top: 2px;
+        }
+
+        .info strong {
+            color: var(--accent);
+        }
+
+        .fact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .fact {
+            display: flex;
+            gap: 1rem;
+            padding: 1.3rem 1.4rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            transition: all 0.3s;
+        }
+
+        .fact:hover {
+            border-color: var(--border-hover);
+            transform: translateX(4px);
+        }
+
+        .fact .num {
+            width: 36px;
+            height: 36px;
+            background: rgba(124, 58, 237, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 0.82rem;
+            flex-shrink: 0;
+        }
+
+        .fact .fact-text strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .fact .fact-text span {
+            font-size: 0.87rem;
+            color: var(--muted);
+        }
+    </style>
+    <!-- Сюда вставите код счетчика LiveInternet -->
+</head>
+
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <span class="logo-dot"></span>
+            <span class="logo-text">день<span>.</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="water.html">Вода</a>
+            <a href="sleep.html" class="active">Сон</a>
+            <a href="move.html">Активность</a>
+            <a href="stats.html">Статистика</a>
+            <a href="achievements.html">Награды</a>
+            <a href="motivation.html">Мотивация</a>
+            <a href="about.html">О проекте</a>
+        </div>
+    </nav>
+
+    <div class="content-wrap">
+        <header class="hero">
+            <div class="badge">Расчёт сна</div>
+            <h1>Во сколько <em>лечь</em>, чтобы выспаться</h1>
+            <p>Сон состоит из циклов по 90 минут. Если проснуться в конце цикла — легче встать. Введи время подъёма —
+                увидишь три варианта времени отхода ко сну.</p>
+        </header>
+
+        <section class="two-col">
+            <div class="panel">
+                <h2>
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    </div>
+                    Расчёт по циклам
+                </h2>
+
+                <div class="field">
+                    <label for="wakeTime">Во сколько нужно встать?</label>
+                    <input type="time" id="wakeTime" value="07:00">
+                </div>
+
+                <div class="info">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <line x1="12" y1="16" x2="12" y2="12" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                    <div><strong>Как это работает:</strong> один цикл сна — примерно 90 минут. Плюс 15 минут на
+                        засыпание. Если проснуться между циклами, утро будет легче.</div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h2>
+                    <div class="icon-box">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <polyline points="12 6 12 12 16 14" />
+                        </svg>
+                    </div>
+                    Варианты времени
+                </h2>
+                <div class="times" id="times"></div>
+            </div>
+        </section>
+
+        <section class="section-head">
+            <h2>Факты о сне</h2>
+            <p>Что полезно знать про отдых</p>
+        </section>
+
+        <section class="tools">
+            <div class="tool">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+                <span class="num">ФАКТ 01</span>
+                <h3>Циклы важнее часов</h3>
+                <p>6 полных циклов (9 часов) дают больше отдыха, чем 8 часов, прерванных в середине цикла.</p>
+            </div>
+            <div class="tool">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 2v20" />
+                        <path d="M2 12h20" />
+                    </svg>
+                </div>
+                <span class="num">ФАКТ 02</span>
+                <h3>Одно и то же время</h3>
+                <p>Ложиться и вставать в одно время помогает организму быстрее засыпать и легче просыпаться.</p>
+            </div>
+            <div class="tool">
+                <div class="tool-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                    </svg>
+                </div>
+                <span class="num">ФАКТ 03</span>
+                <h3>Экран мешает</h3>
+                <p>Свет от телефона сбивает внутренние часы. Лучше отложить его за час до сна.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        День · трекер привычек · 2026 · <a href="about.html">О проекте</a>
+    </footer>
+
+    <script>
+        const wakeInput = document.getElementById('wakeTime');
+        const timesEl = document.getElementById('times');
+
+        function calculate() {
+            const [h, m] = wakeInput.value.split(':').map(Number);
+            const wake = new Date();
+            wake.setHours(h, m, 0, 0);
+            const cycles = [6, 5, 4];
+            timesEl.innerHTML = '';
+            cycles.forEach((c, i) => {
+                const minutes = c * 90 + 15;
+                const bedTime = new Date(wake.getTime() - minutes * 60000);
+                const bedH = String(bedTime.getHours()).padStart(2, '0');
+                const bedM = String(bedTime.getMinutes()).padStart(2, '0');
+                const card = document.createElement('div');
+                card.className = 'time-card';
+                card.style.animation = `fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${i * 0.1}s both`;
+                card.innerHTML = `
+                    <div class="time">${bedH}:${bedM}</div>
+                    <div class="cycles">${c} циклов</div>
+                    <div class="note">${(c * 1.5).toFixed(1)} ч сна</div>
+                `;
+                timesEl.appendChild(card);
+            });
+        }
+
+        wakeInput.addEventListener('input', calculate);
+        calculate();
+    </script>
+</body>
+
+</html>

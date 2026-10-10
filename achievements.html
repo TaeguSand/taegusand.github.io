@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Награды — День</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --accent: #d97706;
+            --accent-2: #dc2626;
+        }
+
+        .achievements {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 900px) {
+            .achievements {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 620px) {
+            .achievements {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .achievement {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.2rem 1.8rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+            box-shadow: var(--shadow);
+        }
+
+        .achievement.locked {
+            opacity: 0.55;
+        }
+
+        .achievement.unlocked {
+            border-color: rgba(217, 119, 6, 0.3);
+        }
+
+        .achievement.unlocked:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(217, 119, 6, 0.12);
+            border-color: rgba(217, 119, 6, 0.5);
+        }
+
+        .achievement .medal {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f1e8;
+            border: 2px solid var(--border);
+            transition: all 0.4s;
+        }
+
+        .achievement.unlocked .medal {
+            background: linear-gradient(135deg, rgba(217, 119, 6, 0.15), rgba(220, 38, 38, 0.1));
+            border-color: rgba(217, 119, 6, 0.3);
+            box-shadow: 0 0 24px rgba(217, 119, 6, 0.2);
+            animation: medalPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes medalPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 24px rgba(217, 119, 6, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 36px rgba(217, 119, 6, 0.4);
+            }
+        }
+
+        .achievement .medal svg {
+            width: 38px;
+            height: 38px;
+            color: var(--muted);
+        }
+
+        .achievement.unlocked .medal svg {
+            color: var(--accent);
+        }
+
+        .achievement h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .achievement p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .achievement .status {
+            margin-top: 1.2rem;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            display: inline-block;
+        }
+
+        .achievement.locked .status {
+            color: var(--muted);
+            background: #f1efe8;
+        }
+
+        .achievement.unlocked .status {
+            color: var(--accent);
+            background: rgba(217, 119, 6, 0.1);
+        }
+    </style>
+    <!-- Сюда вставите код счетчика LiveInternet -->
+</head>
+
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <span class="logo-dot"></span>
+            <span class="logo-text">день<span>.</span></span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Главная</a>
+            <a href="water.html">Вода</a>
+            <a href="sleep.html">Сон</a>
+            <a href="move.html">Активность</a>
+            <a href="stats.html">Статистика</a>
+            <a href="achievements.html" class="active">Награды</a>
+            <a href="motivation.html">Мотивация</a>
+            <a href="about.html">О проекте</a>
+        </div>
+    </nav>
+
+    <div class="content-wrap">
+        <header class="hero">
+            <div class="badge">Твои достижения</div>
+            <h1>Награды за <em>привычки</em></h1>
+            <p>Каждый день, когда ты выполняешь все три привычки, приближает тебя к новой награде. Начни с малого.</p>
+        </header>
+
+        <section class="achievements" id="achievements"></section>
+    </div>
+
+    <footer>
+        День · трекер привычек · 2026 · <a href="about.html">О проекте</a>
+    </footer>
+
+    <script>
+        const today = new Date();
+        const todayIdx = (today.getDay() + 6) % 7;
+
+        const weekData = [];
+        for (let i = 0; i < 7; i++) {
+            const d = new Date(today);
+            d.setDate(today.getDate() - todayIdx + i);
+            const key = 'habit-tracker-' + d.toISOString().slice(0, 10);
+            const state = JSON.parse(localStorage.getItem(key) || '{}');
+            const done = Object.values(state).filter(Boolean).length;
+            weekData.push({ done: done, isToday: i === todayIdx });
+        }
+
+        const totalDone = weekData.reduce((s, d) => s + d.done, 0);
+        const fullDays = weekData.filter(d => d.done === 3).length;
+        const anyDay = weekData.some(d => d.done > 0);
+
+        let streak = 0;
+        for (let i = todayIdx; i >= 0; i--) {
+            if (weekData[i].done === 3) streak++;
+            else break;
+        }
+
+        const achievementsList = [
+            { id: 'first', title: 'Первый шаг', desc: 'Отметить хотя бы одну привычку', icon: '<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>', unlocked: anyDay },
+            { id: 'full-day', title: 'Полный день', desc: 'Выполнить все три привычки за день', icon: '<path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>', unlocked: fullDays >= 1 },
+            { id: 'three-full', title: 'Три полных дня', desc: 'Выполнить все три привычки три дня', icon: '<path d="M12 15l-2 5 2-1 2 1-2-5z"/><circle cx="12" cy="9" r="6"/>', unlocked: fullDays >= 3 },
+            { id: 'streak-3', title: 'Серия из трёх', desc: 'Полных дней подряд — три', icon: '<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>', unlocked: streak >= 3 },
+            { id: 'all-15', title: 'Половина пути', desc: '15 отметок за неделю', icon: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>', unlocked: totalDone >= 15 },
+            { id: 'week-perfect', title: 'Идеальная неделя', desc: 'Все 7 дней выполнены полностью', icon: '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>', unlocked: weekData.every(d => d.done === 3) }
+        ];
+
+        const container = document.getElementById('achievements');
+        achievementsList.forEach((a, i) => {
+            const div = document.createElement('div');
+            div.className = 'achievement ' + (a.unlocked ? 'unlocked' : 'locked');
+            div.style.animationDelay = (i * 0.08) + 's';
+            div.innerHTML = `
+                <div class="medal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${a.icon}</svg>
+                </div>
+                <h3>${a.title}</h3>
+                <p>${a.desc}</p>
+                <div class="status">${a.unlocked ? 'Открыто' : 'Закрыто'}</div>
+            `;
+            container.appendChild(div);
+        });
+    </script>
+</body>
+
+</html>
