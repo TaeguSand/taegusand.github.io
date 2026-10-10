@@ -1,195 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вода — сколько нужно пить</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        :root {
-            --accent: #2563eb;
-            --accent-2: #16a34a;
-        }
-
-        .result-box {
-            margin-top: 1.8rem;
-            padding: 1.8rem;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.06), rgba(22, 163, 74, 0.04));
-            border: 1px solid rgba(37, 99, 235, 0.15);
-            border-radius: 14px;
-            text-align: center;
-        }
-
-        .result-box .label {
-            font-size: 0.72rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 0.6rem;
-            font-weight: 700;
-        }
-
-        .result-box .value {
-            font-size: 2.8rem;
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1;
-            color: var(--accent);
-        }
-
-        .result-box .sub {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-top: 0.6rem;
-        }
-
-        .glasses {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-            margin-top: 1.5rem;
-            justify-content: center;
-        }
-
-        .glass {
-            width: 48px;
-            height: 64px;
-            border: 2px solid var(--border);
-            border-radius: 8px 8px 16px 16px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            padding-bottom: 8px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            user-select: none;
-            font-size: 0.78rem;
-            color: var(--muted);
-            font-weight: 700;
-            position: relative;
-            overflow: hidden;
-            background: #fff;
-        }
-
-        .glass:hover {
-            border-color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .glass.filled {
-            border-color: var(--accent);
-            color: #fff;
-            background: linear-gradient(180deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.65) 100%);
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.2);
-        }
-
-        .glass span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .glass-counter {
-            text-align: center;
-            margin-top: 1.5rem;
-            font-size: 0.95rem;
-            color: var(--muted);
-        }
-
-        .glass-counter strong {
-            color: var(--accent);
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .tips-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .tip-card {
-            display: flex;
-            gap: 1rem;
-            padding: 1.3rem 1.4rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            transition: all 0.3s;
-        }
-
-        .tip-card:hover {
-            border-color: var(--border-hover);
-            transform: translateX(4px);
-            background: rgba(37, 99, 235, 0.03);
-        }
-
-        .tip-card .num {
-            width: 36px;
-            height: 36px;
-            background: rgba(37, 99, 235, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 0.82rem;
-            flex-shrink: 0;
-        }
-
-        .tip-card .tip-text strong {
-            display: block;
-            color: var(--text);
-            margin-bottom: 0.2rem;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .tip-card .tip-text span {
-            font-size: 0.87rem;
-            color: var(--muted);
-        }
-
-        .info-box {
-            padding: 1.5rem;
-            background: rgba(37, 99, 235, 0.05);
-            border: 1px solid rgba(37, 99, 235, 0.15);
-            border-radius: 14px;
-            font-size: 0.92rem;
-            color: #1e3a8a;
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .info-box svg {
-            width: 22px;
-            height: 22px;
-            flex-shrink: 0;
-            color: var(--accent);
-            margin-top: 2px;
-        }
-
-        .info-box strong {
-            color: var(--accent);
-        }
+        :root { --accent: #2563eb; --accent-2: #16a34a; }
+        .result-box { margin-top: 1.8rem; padding: 1.8rem; background: linear-gradient(135deg, rgba(37,99,235,0.06), rgba(22,163,74,0.04)); border: 1px solid rgba(37,99,235,0.15); border-radius: 14px; text-align: center; }
+        .result-box .label { font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 0.6rem; font-weight: 700; }
+        .result-box .value { font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; line-height: 1; color: var(--accent); }
+        .result-box .sub { font-size: 0.9rem; color: var(--muted); margin-top: 0.6rem; }
+        .glasses { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; justify-content: center; }
+        .glass { width: 48px; height: 64px; border: 2px solid var(--border); border-radius: 8px 8px 16px 16px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); user-select: none; font-size: 0.78rem; color: var(--muted); font-weight: 700; position: relative; overflow: hidden; background: #fff; }
+        .glass:hover { border-color: var(--accent); transform: translateY(-3px); }
+        .glass.filled { border-color: var(--accent); color: #fff; background: linear-gradient(180deg, rgba(37,99,235,0.15) 0%, rgba(37,99,235,0.65) 100%); box-shadow: 0 6px 16px rgba(37,99,235,0.2); }
+        .glass span { position: relative; z-index: 1; }
+        .glass-counter { text-align: center; margin-top: 1.5rem; font-size: 0.95rem; color: var(--muted); }
+        .glass-counter strong { color: var(--accent); font-size: 1.3rem; font-weight: 700; }
     </style>
-    <!-- Сюда вставите код счетчика LiveInternet -->
 </head>
-
 <body>
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
+    <div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 
     <nav>
-        <div class="logo">
-            <span class="logo-dot"></span>
-            <span class="logo-text">день<span>.</span></span>
-        </div>
+        <div class="logo"><span class="logo-dot"></span><span class="logo-text">день<span>.</span></span></div>
         <div class="nav-links">
             <a href="index.html">Главная</a>
             <a href="water.html" class="active">Вода</a>
@@ -206,27 +41,19 @@
         <header class="hero">
             <div class="badge">Калькулятор воды</div>
             <h1>Сколько воды <em>нужно именно тебе</em></h1>
-            <p>Расчёт по весу и активности. Справа — трекер стаканов, слева — калькулятор нормы. Двигайся по своему
-                ритму.</p>
+            <p>Расчёт по весу и активности. Справа — трекер стаканов, слева — калькулятор нормы.</p>
         </header>
 
         <section class="two-col">
             <div class="panel">
                 <h2>
-                    <div class="icon-box">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-                        </svg>
-                    </div>
+                    <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
                     Калькулятор нормы
                 </h2>
-
                 <div class="field">
                     <label for="weight">Вес (кг)</label>
                     <input type="number" id="weight" placeholder="Например, 70" min="30" max="200" value="70">
                 </div>
-
                 <div class="field">
                     <label for="activity">Уровень активности</label>
                     <select id="activity">
@@ -236,7 +63,6 @@
                         <option value="1.3">Очень высокий — жара, нагрузки</option>
                     </select>
                 </div>
-
                 <div class="result-box">
                     <div class="label">Твоя норма на день</div>
                     <div class="value" id="norm">2,45 л</div>
@@ -246,64 +72,11 @@
 
             <div class="panel">
                 <h2>
-                    <div class="icon-box">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M8 2h8l-1 12H9L8 2z" />
-                            <path d="M4 22h16" />
-                        </svg>
-                    </div>
+                    <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 12H9L8 2z"/><path d="M4 22h16"/></svg></div>
                     Трекер стаканов на сегодня
                 </h2>
                 <div class="glasses" id="glasses"></div>
-                <div class="glass-counter">
-                    Выпито: <strong id="glassCount">0</strong> из <strong id="glassTarget">8</strong>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-head">
-            <h2>Полезно знать</h2>
-            <p>Простые правила, которые работают</p>
-        </section>
-
-        <section class="tools">
-            <div class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10" />
-                        <polyline points="12 6 12 12 16 14" />
-                    </svg>
-                </div>
-                <span class="num">СОВЕТ 01</span>
-                <h3>Утром — стакан</h3>
-                <p>Организм за ночь теряет влагу. Стакан воды сразу после пробуждения помогает запустить день.</p>
-            </div>
-            <div class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M20 12V8H6a2 2 0 0 1 0-4h12v4" />
-                        <path d="M4 6v12a2 2 0 0 0 2 2h14v-4" />
-                        <path d="M18 12a2 2 0 0 0 0 4h4v-4z" />
-                    </svg>
-                </div>
-                <span class="num">СОВЕТ 02</span>
-                <h3>Еда — тоже вода</h3>
-                <p>Овощи, фрукты, супы — это тоже жидкость. Не обязательно пить всё только стаканами.</p>
-            </div>
-            <div class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-                    </svg>
-                </div>
-                <span class="num">СОВЕТ 03</span>
-                <h3>Напоминания</h3>
-                <p>Когда занят — забываешь пить. Поставь бутылку на видное место или напоминание на телефон.</p>
+                <div class="glass-counter">Выпито: <strong id="glassCount">0</strong> из <strong id="glassTarget">8</strong></div>
             </div>
         </section>
     </div>
@@ -311,6 +84,19 @@
     <footer>
         День · трекер привычек · 2026 · <a href="about.html">О проекте</a>
     </footer>
+
+    <div style="text-align: center; padding: 1.5rem 0 2rem; border-top: 1px solid #eae6de;">
+        <!--LiveInternet counter--><a href="https://www.liveinternet.ru/click"
+        target="_blank"><img id="licntFA1E" width="88" height="31" style="border:0"
+        title="LiveInternet: показано число просмотров и посетителей за 24 часа"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+        alt=""/></a><script>(function(d,s){d.getElementById("licntFA1E").src=
+        "https://counter.yadro.ru/hit?t52.13;r"+escape(d.referrer)+
+        ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+        (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+        ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
+        (document,screen)</script><!--/LiveInternet-->
+    </div>
 
     <script>
         const weightInput = document.getElementById('weight');
@@ -320,13 +106,10 @@
         const glassesEl = document.getElementById('glasses');
         const glassCountEl = document.getElementById('glassCount');
         const glassTargetEl = document.getElementById('glassTarget');
-
         const today = new Date();
         const todayKey = 'water-glasses-' + today.toISOString().slice(0, 10);
         let glassesCount = parseInt(localStorage.getItem(todayKey) || '0');
-
         function formatLiters(l) { return l.toFixed(2).replace('.', ',') + ' л'; }
-
         function calculate() {
             const weight = parseFloat(weightInput.value) || 70;
             const activity = parseFloat(activitySelect.value) || 1.1;
@@ -338,7 +121,6 @@
             renderGlasses(glasses);
             updateGlassCount();
         }
-
         function renderGlasses(target) {
             glassesEl.innerHTML = '';
             for (let i = 0; i < target; i++) {
@@ -354,13 +136,10 @@
                 glassesEl.appendChild(glass);
             }
         }
-
         function updateGlassCount() { glassCountEl.textContent = glassesCount; }
-
         weightInput.addEventListener('input', calculate);
         activitySelect.addEventListener('change', calculate);
         calculate();
     </script>
 </body>
-
 </html>
