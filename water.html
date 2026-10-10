@@ -52,11 +52,11 @@
                 </h2>
                 <div class="field">
                     <label for="weight">Вес (кг)</label>
-                    <input type="number" id="weight" placeholder="Например, 70" min="30" max="200" value="70">
+                    <input type="number" id="weight" placeholder="Например, 70" min="30" max="200" value="70" data-block="water-weight">
                 </div>
                 <div class="field">
                     <label for="activity">Уровень активности</label>
-                    <select id="activity">
+                    <select id="activity" data-block="water-activity">
                         <option value="1.0">Низкий — сидячий день</option>
                         <option value="1.1" selected>Средний — немного ходьбы</option>
                         <option value="1.2">Высокий — спорт, активность</option>
@@ -95,6 +95,40 @@
             ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
             (document,screen)</script><!--/LiveInternet-->
         </span>
+        <span class="li-wrap">
+            <!-- Top100 (Kraken) Counter -->
+            <script>
+                (function (w, d, c) {
+                (w[c] = w[c] || []).push(function() {
+                    var options = {
+                        project: 7752728,
+                        attributes_dataset: [ "data-block" ],
+                        trackHashes: true,
+                        user_id: null,
+                    };
+                    try {
+                        w.top100Counter = new top100(options);
+                    } catch(e) { }
+                });
+                var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src =
+                (d.location.protocol == "https:" ? "https:" : "http:") +
+                "//st.top100.ru/top100/top100.js";
+
+                if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+            })(window, document, "_top100q");
+            </script>
+            <noscript>
+              <img src="//counter.rambler.ru/top100.cnt?pid=7752728" alt="Топ-100" />
+            </noscript>
+            <!-- END Top100 (Kraken) Counter -->
+        </span>
     </footer>
 
     <script>
@@ -125,12 +159,16 @@
             for (let i = 0; i < target; i++) {
                 const glass = document.createElement('div');
                 glass.className = 'glass' + (i < glassesCount ? ' filled' : '');
+                glass.setAttribute('data-block', 'glass-' + (i + 1));
                 glass.innerHTML = '<span>' + (i + 1) + '</span>';
                 glass.addEventListener('click', () => {
                     glassesCount = (i + 1 === glassesCount) ? i : i + 1;
                     localStorage.setItem(todayKey, glassesCount);
                     renderGlasses(target);
                     updateGlassCount();
+                    if (window.top100Counter && typeof window.top100Counter.reachGoal === 'function') {
+                        window.top100Counter.reachGoal('water_glass');
+                    }
                 });
                 glassesEl.appendChild(glass);
             }
