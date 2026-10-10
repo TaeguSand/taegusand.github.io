@@ -149,9 +149,24 @@ nav {
 .tool h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.3px; color: var(--text); }
 .tool p { font-size: 0.92rem; color: var(--muted); line-height: 1.55; }
 
-footer { padding: 3rem 2rem; text-align: center; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--border); position: relative; z-index: 1; background: rgba(255,255,255,0.4); }
+footer {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+    background: rgba(255,255,255,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
 footer a { color: var(--accent); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
+footer .li-wrap { display: inline-flex; align-items: center; }
 
 @media (max-width: 640px) {
     .hero { padding: 3.5rem 1.3rem 2rem; }
