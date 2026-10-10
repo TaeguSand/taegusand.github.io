@@ -51,11 +51,11 @@
                 </h2>
                 <div class="field">
                     <label for="age">Возраст</label>
-                    <input type="number" id="age" value="30" min="10" max="100">
+                    <input type="number" id="age" value="30" min="10" max="100" data-block="move-age">
                 </div>
                 <div class="field">
                     <label for="level">Текущий уровень активности</label>
-                    <select id="level">
+                    <select id="level" data-block="move-level">
                         <option value="low">Мало двигаюсь (менее 5000)</option>
                         <option value="mid" selected>Средне (5000–8000)</option>
                         <option value="high">Много (более 8000)</option>
@@ -74,10 +74,10 @@
                     Как добавить движение
                 </h2>
                 <div class="tips">
-                    <div class="tip"><div class="num">01</div><div class="tip-text"><strong>Выйди на остановку раньше</strong><span>Добавит около 1000–1500 шагов в день.</span></div></div>
-                    <div class="tip"><div class="num">02</div><div class="tip-text"><strong>Говори по телефону стоя</strong><span>Простой способ добавить движения.</span></div></div>
-                    <div class="tip"><div class="num">03</div><div class="tip-text"><strong>Короткая прогулка вечером</strong><span>15 минут после ужина — ещё 1500–2000 шагов.</span></div></div>
-                    <div class="tip"><div class="num">04</div><div class="tip-text"><strong>Лестница вместо лифта</strong><span>Один этаж — около 20 шагов.</span></div></div>
+                    <div class="tip" data-block="tip-1"><div class="num">01</div><div class="tip-text"><strong>Выйди на остановку раньше</strong><span>Добавит около 1000–1500 шагов в день.</span></div></div>
+                    <div class="tip" data-block="tip-2"><div class="num">02</div><div class="tip-text"><strong>Говори по телефону стоя</strong><span>Простой способ добавить движения.</span></div></div>
+                    <div class="tip" data-block="tip-3"><div class="num">03</div><div class="tip-text"><strong>Короткая прогулка вечером</strong><span>15 минут после ужина — ещё 1500–2000 шагов.</span></div></div>
+                    <div class="tip" data-block="tip-4"><div class="num">04</div><div class="tip-text"><strong>Лестница вместо лифта</strong><span>Один этаж — около 20 шагов.</span></div></div>
                 </div>
             </div>
         </section>
@@ -96,6 +96,40 @@
             (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
             ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
             (document,screen)</script><!--/LiveInternet-->
+        </span>
+        <span class="li-wrap">
+            <!-- Top100 (Kraken) Counter -->
+            <script>
+                (function (w, d, c) {
+                (w[c] = w[c] || []).push(function() {
+                    var options = {
+                        project: 7752728,
+                        attributes_dataset: [ "data-block" ],
+                        trackHashes: true,
+                        user_id: null,
+                    };
+                    try {
+                        w.top100Counter = new top100(options);
+                    } catch(e) { }
+                });
+                var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src =
+                (d.location.protocol == "https:" ? "https:" : "http:") +
+                "//st.top100.ru/top100/top100.js";
+
+                if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+            })(window, document, "_top100q");
+            </script>
+            <noscript>
+              <img src="//counter.rambler.ru/top100.cnt?pid=7752728" alt="Топ-100" />
+            </noscript>
+            <!-- END Top100 (Kraken) Counter -->
         </span>
     </footer>
 
