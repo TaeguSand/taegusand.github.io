@@ -66,6 +66,40 @@
             ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
             (document,screen)</script><!--/LiveInternet-->
         </span>
+        <span class="li-wrap">
+            <!-- Top100 (Kraken) Counter -->
+            <script>
+                (function (w, d, c) {
+                (w[c] = w[c] || []).push(function() {
+                    var options = {
+                        project: 7752728,
+                        attributes_dataset: [ "data-block" ],
+                        trackHashes: true,
+                        user_id: null,
+                    };
+                    try {
+                        w.top100Counter = new top100(options);
+                    } catch(e) { }
+                });
+                var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src =
+                (d.location.protocol == "https:" ? "https:" : "http:") +
+                "//st.top100.ru/top100/top100.js";
+
+                if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+            })(window, document, "_top100q");
+            </script>
+            <noscript>
+              <img src="//counter.rambler.ru/top100.cnt?pid=7752728" alt="Топ-100" />
+            </noscript>
+            <!-- END Top100 (Kraken) Counter -->
+        </span>
     </footer>
 
     <script>
@@ -100,6 +134,7 @@
         achievementsList.forEach((a, i) => {
             const div = document.createElement('div');
             div.className = 'achievement ' + (a.unlocked ? 'unlocked' : 'locked');
+            div.setAttribute('data-block', 'achievement-' + i);
             div.style.animationDelay = (i * 0.08) + 's';
             div.innerHTML = `<div class="medal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${a.icon}</svg></div><h3>${a.title}</h3><p>${a.desc}</p><div class="status">${a.unlocked ? 'Открыто' : 'Закрыто'}</div>`;
             container.appendChild(div);
