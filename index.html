@@ -1,283 +1,49 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>День — трекер привычек</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .date {
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--muted);
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            font-weight: 700;
-        }
-
-        .habit {
-            display: flex;
-            align-items: center;
-            gap: 1.1rem;
-            padding: 1.25rem 1.3rem;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            margin-bottom: 0.85rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--bg);
-            user-select: none;
-        }
-
-        .habit:hover {
-            border-color: rgba(22, 163, 74, 0.4);
-            transform: translateX(5px);
-            background: rgba(22, 163, 74, 0.03);
-        }
-
-        .habit.done {
-            background: rgba(22, 163, 74, 0.06);
-            border-color: rgba(22, 163, 74, 0.4);
-        }
-
-        .habit-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            background: #f1efe8;
-            color: var(--muted);
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .habit-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .habit.done .habit-icon {
-            background: var(--accent);
-            color: #fff;
-            box-shadow: 0 4px 16px rgba(22, 163, 74, 0.3);
-            transform: rotate(-6deg) scale(1.05);
-        }
-
-        .habit-content {
-            flex: 1;
-        }
-
-        .habit-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.1rem;
-            transition: all 0.3s;
-        }
-
-        .habit.done .habit-title {
-            color: var(--accent);
-        }
-
-        .habit-desc {
-            font-size: 0.82rem;
-            color: var(--muted);
-        }
-
-        .habit-check {
-            width: 26px;
-            height: 26px;
-            border: 2px solid var(--border);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: all 0.3s;
-            background: #fff;
-        }
-
-        .habit.done .habit-check {
-            background: var(--accent);
-            border-color: var(--accent);
-            transform: scale(1.15);
-        }
-
-        .habit-check svg {
-            width: 13px;
-            height: 13px;
-            color: #fff;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .habit.done .habit-check svg {
-            opacity: 1;
-        }
-
-        .progress {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .progress .label {
-            font-size: 0.72rem;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 0.6rem;
-            font-weight: 700;
-        }
-
-        .progress .value {
-            font-size: 3rem;
-            font-weight: 800;
-            letter-spacing: -2px;
-            line-height: 1;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: inline-block;
-        }
-
-        .progress .sub {
-            font-size: 0.9rem;
-            color: var(--muted);
-            margin-top: 0.5rem;
-        }
-
-        .progress-bar {
-            height: 6px;
-            background: #f1efe8;
-            border-radius: 100px;
-            overflow: hidden;
-            margin-top: 1.5rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            width: 0%;
-            transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .week {
-            display: flex;
-            justify-content: center;
-            gap: 0.6rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .day-dot {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: #f1efe8;
-            border: 1px solid transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--muted);
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .day-dot.today {
-            border-color: var(--accent);
-            color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.1);
-        }
-
-        .day-dot.full {
-            background: var(--accent);
-            color: #fff;
-        }
-
-        .quick-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.9rem;
-        }
-
-        .quick-link {
-            display: flex;
-            align-items: center;
-            gap: 1.1rem;
-            padding: 1.3rem 1.4rem;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .quick-link:hover {
-            border-color: var(--border-hover);
-            transform: translateX(5px);
-            background: rgba(22, 163, 74, 0.03);
-        }
-
-        .quick-link .ql-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(22, 163, 74, 0.1);
-            color: var(--accent);
-            flex-shrink: 0;
-            transition: all 0.3s;
-        }
-
-        .quick-link:hover .ql-icon {
-            transform: scale(1.08) rotate(-4deg);
-        }
-
-        .quick-link .ql-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .quick-link .ql-text {
-            flex: 1;
-        }
-
-        .quick-link .ql-text strong {
-            display: block;
-            font-size: 0.98rem;
-            font-weight: 600;
-            margin-bottom: 0.15rem;
-            color: var(--text);
-        }
-
-        .quick-link .ql-text span {
-            font-size: 0.82rem;
-            color: var(--muted);
-        }
-
-        .quick-link .arrow {
-            color: var(--muted);
-            transition: all 0.3s;
-        }
-
-        .quick-link:hover .arrow {
-            color: var(--accent);
-            transform: translateX(3px);
-        }
+        .date { text-align: center; font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; }
+        .habit { display: flex; align-items: center; gap: 1.1rem; padding: 1.25rem 1.3rem; border: 1px solid var(--border); border-radius: 14px; margin-bottom: 0.85rem; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: var(--bg); user-select: none; }
+        .habit:hover { border-color: rgba(22,163,74,0.4); transform: translateX(5px); background: rgba(22,163,74,0.03); }
+        .habit.done { background: rgba(22,163,74,0.06); border-color: rgba(22,163,74,0.4); }
+        .habit-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #f1efe8; color: var(--muted); transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+        .habit-icon svg { width: 20px; height: 20px; }
+        .habit.done .habit-icon { background: var(--accent); color: #fff; box-shadow: 0 4px 16px rgba(22,163,74,0.3); transform: rotate(-6deg) scale(1.05); }
+        .habit-content { flex: 1; }
+        .habit-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.1rem; transition: all 0.3s; }
+        .habit.done .habit-title { color: var(--accent); }
+        .habit-desc { font-size: 0.82rem; color: var(--muted); }
+        .habit-check { width: 26px; height: 26px; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.3s; background: #fff; }
+        .habit.done .habit-check { background: var(--accent); border-color: var(--accent); transform: scale(1.15); }
+        .habit-check svg { width: 13px; height: 13px; color: #fff; opacity: 0; transition: opacity 0.2s; }
+        .habit.done .habit-check svg { opacity: 1; }
+        .progress { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center; }
+        .progress .label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 2.5px; margin-bottom: 0.6rem; font-weight: 700; }
+        .progress .value { font-size: 3rem; font-weight: 800; letter-spacing: -2px; line-height: 1; background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
+        .progress .sub { font-size: 0.9rem; color: var(--muted); margin-top: 0.5rem; }
+        .progress-bar { height: 6px; background: #f1efe8; border-radius: 100px; overflow: hidden; margin-top: 1.5rem; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); width: 0%; transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1); }
+        .week { display: flex; justify-content: center; gap: 0.6rem; margin-top: 2rem; flex-wrap: wrap; }
+        .day-dot { width: 42px; height: 42px; border-radius: 50%; background: #f1efe8; border: 1px solid transparent; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: var(--muted); transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+        .day-dot.today { border-color: var(--accent); color: var(--accent); box-shadow: 0 0 0 4px rgba(22,163,74,0.1); }
+        .day-dot.full { background: var(--accent); color: #fff; }
+        .quick-list { display: flex; flex-direction: column; gap: 0.9rem; }
+        .quick-link { display: flex; align-items: center; gap: 1.1rem; padding: 1.3rem 1.4rem; background: var(--bg); border: 1px solid var(--border); border-radius: 14px; text-decoration: none; color: inherit; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .quick-link:hover { border-color: var(--border-hover); transform: translateX(5px); background: rgba(22,163,74,0.03); }
+        .quick-link .ql-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(22,163,74,0.1); color: var(--accent); flex-shrink: 0; transition: all 0.3s; }
+        .quick-link:hover .ql-icon { transform: scale(1.08) rotate(-4deg); }
+        .quick-link .ql-icon svg { width: 20px; height: 20px; }
+        .quick-link .ql-text { flex: 1; }
+        .quick-link .ql-text strong { display: block; font-size: 0.98rem; font-weight: 600; margin-bottom: 0.15rem; color: var(--text); }
+        .quick-link .ql-text span { font-size: 0.82rem; color: var(--muted); }
+        .quick-link .arrow { color: var(--muted); transition: all 0.3s; }
+        .quick-link:hover .arrow { color: var(--accent); transform: translateX(3px); }
     </style>
-    <!-- Сюда вставите код счетчика LiveInternet -->
 </head>
-
 <body>
     <div class="bg-orbs">
         <div class="orb orb-1"></div>
@@ -291,7 +57,7 @@
             <span class="logo-text">день<span>.</span></span>
         </div>
         <div class="nav-links">
-            <a href="menu.html" class="active">Главная</a>
+            <a href="index.html" class="active">Главная</a>
             <a href="water.html">Вода</a>
             <a href="sleep.html">Сон</a>
             <a href="move.html">Активность</a>
@@ -306,8 +72,7 @@
         <header class="hero">
             <div class="badge">Трекер привычек</div>
             <h1>Три привычки <em>на сегодня</em></h1>
-            <p>Простой трекер без регистрации. Отмечай, что сделал, и следи за прогрессом. Данные хранятся только в
-                твоём браузере.</p>
+            <p>Простой трекер без регистрации. Отмечай, что сделал, и следи за прогрессом. Данные хранятся только в твоём браузере.</p>
         </header>
 
         <section class="two-col">
@@ -316,58 +81,40 @@
 
                 <div class="habit" data-habit="water">
                     <div class="habit-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
                     </div>
                     <div class="habit-content">
                         <div class="habit-title">Выпил воду</div>
                         <div class="habit-desc">Хотя бы 6–8 стаканов за день</div>
                     </div>
                     <div class="habit-check">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
                 </div>
 
                 <div class="habit" data-habit="sleep">
                     <div class="habit-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
                     </div>
                     <div class="habit-content">
                         <div class="habit-title">Поспал достаточно</div>
                         <div class="habit-desc">7–8 часов, без телефона перед сном</div>
                     </div>
                     <div class="habit-check">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
                 </div>
 
                 <div class="habit" data-habit="move">
                     <div class="habit-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                     </div>
                     <div class="habit-content">
                         <div class="habit-title">Двигался</div>
                         <div class="habit-desc">Прогулка, зарядка или спорт — хотя бы 20 минут</div>
                     </div>
                     <div class="habit-check">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                     </div>
                 </div>
 
@@ -386,93 +133,30 @@
             <div class="panel">
                 <h2>
                     <div class="icon-box">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="12" y1="16" x2="12" y2="12" />
-                            <line x1="12" y1="8" x2="12.01" y2="8" />
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
                     </div>
                     Что ещё есть на сайте
                 </h2>
                 <div class="quick-list">
                     <a href="stats.html" class="quick-link">
-                        <div class="ql-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="18" y1="20" x2="18" y2="10" />
-                                <line x1="12" y1="20" x2="12" y2="4" />
-                                <line x1="6" y1="20" x2="6" y2="14" />
-                            </svg>
-                        </div>
-                        <div class="ql-text">
-                            <strong>Статистика</strong>
-                            <span>Графики прогресса за неделю</span>
-                        </div>
-                        <div class="arrow">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                        </div>
+                        <div class="ql-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+                        <div class="ql-text"><strong>Статистика</strong><span>Графики прогресса за неделю</span></div>
+                        <div class="arrow"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
                     </a>
                     <a href="achievements.html" class="quick-link">
-                        <div class="ql-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="8" r="6" />
-                                <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
-                            </svg>
-                        </div>
-                        <div class="ql-text">
-                            <strong>Награды</strong>
-                            <span>Значки за серии и рекорды</span>
-                        </div>
-                        <div class="arrow">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                        </div>
+                        <div class="ql-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
+                        <div class="ql-text"><strong>Награды</strong><span>Значки за серии и рекорды</span></div>
+                        <div class="arrow"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
                     </a>
                     <a href="motivation.html" class="quick-link">
-                        <div class="ql-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                            </svg>
-                        </div>
-                        <div class="ql-text">
-                            <strong>Мотивация</strong>
-                            <span>Советы и цитаты на день</span>
-                        </div>
-                        <div class="arrow">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                        </div>
+                        <div class="ql-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+                        <div class="ql-text"><strong>Мотивация</strong><span>Советы и цитаты на день</span></div>
+                        <div class="arrow"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
                     </a>
                     <a href="about.html" class="quick-link">
-                        <div class="ql-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="7" height="7" />
-                                <rect x="14" y="3" width="7" height="7" />
-                                <rect x="14" y="14" width="7" height="7" />
-                                <rect x="3" y="14" width="7" height="7" />
-                            </svg>
-                        </div>
-                        <div class="ql-text">
-                            <strong>О проекте</strong>
-                            <span>Как всё устроено внутри</span>
-                        </div>
-                        <div class="arrow">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 18 15 12 9 6" />
-                            </svg>
-                        </div>
+                        <div class="ql-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+                        <div class="ql-text"><strong>О проекте</strong><span>Как всё устроено внутри</span></div>
+                        <div class="arrow"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
                     </a>
                 </div>
             </div>
@@ -485,70 +169,37 @@
 
         <section class="tools">
             <a href="water.html" class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z" />
-                    </svg>
-                </div>
+                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
                 <span class="num">01 / ВОДА</span>
                 <h3>Сколько воды нужно</h3>
                 <p>Расчёт нормы по весу и активности. Плюс трекер стаканов на день.</p>
             </a>
             <a href="sleep.html" class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                    </svg>
-                </div>
+                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
                 <span class="num">02 / СОН</span>
                 <h3>Во сколько лечь</h3>
                 <p>Расчёт циклов сна. Варианты времени, чтобы встать отдохнувшим.</p>
             </a>
             <a href="move.html" class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                    </svg>
-                </div>
+                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
                 <span class="num">03 / АКТИВНОСТЬ</span>
                 <h3>Сколько шагов</h3>
                 <p>Персональная цель по шагам и советы, как добавить движение в день.</p>
             </a>
             <a href="stats.html" class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <line x1="18" y1="20" x2="18" y2="10" />
-                        <line x1="12" y1="20" x2="12" y2="4" />
-                        <line x1="6" y1="20" x2="6" y2="14" />
-                    </svg>
-                </div>
+                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
                 <span class="num">04 / СТАТИСТИКА</span>
                 <h3>Твой прогресс</h3>
                 <p>Графики за неделю и текущая серия дней. Автоматически из твоих данных.</p>
             </a>
             <a href="achievements.html" class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="8" r="6" />
-                        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11" />
-                    </svg>
-                </div>
+                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg></div>
                 <span class="num">05 / НАГРАДЫ</span>
                 <h3>Достижения</h3>
                 <p>Значки за полные дни, серии и рекорды. Открываются по мере прогресса.</p>
             </a>
             <a href="motivation.html" class="tool">
-                <div class="tool-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                    </svg>
-                </div>
+                <div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
                 <span class="num">06 / МОТИВАЦИЯ</span>
                 <h3>Мысли на день</h3>
                 <p>Короткие цитаты и напоминания. Можно листать, если нужна поддержка.</p>
@@ -559,6 +210,19 @@
     <footer>
         День · трекер привычек · 2026 · <a href="about.html">О проекте</a>
     </footer>
+
+    <div style="text-align: center; padding: 1.5rem 0 2rem; border-top: 1px solid #eae6de;">
+        <!--LiveInternet counter--><a href="https://www.liveinternet.ru/click"
+        target="_blank"><img id="licntFA1E" width="88" height="31" style="border:0"
+        title="LiveInternet: показано число просмотров и посетителей за 24 часа"
+        src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+        alt=""/></a><script>(function(d,s){d.getElementById("licntFA1E").src=
+        "https://counter.yadro.ru/hit?t52.13;r"+escape(d.referrer)+
+        ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
+        (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
+        ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
+        (document,screen)</script><!--/LiveInternet-->
+    </div>
 
     <script>
         const today = new Date();
@@ -621,5 +285,4 @@
         renderWeek();
     </script>
 </body>
-
 </html>
