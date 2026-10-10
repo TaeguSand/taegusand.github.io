@@ -63,18 +63,18 @@
                     <div class="quote-author" id="quoteAuthor">Проект «День»</div>
                 </div>
                 <div class="card-actions">
-                    <button class="btn-ghost" id="nextBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Другая мысль</button>
-                    <button class="btn-ghost" id="randomBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>Случайная</button>
+                    <button class="btn-ghost" id="nextBtn" data-block="next-quote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>Другая мысль</button>
+                    <button class="btn-ghost" id="randomBtn" data-block="random-quote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>Случайная</button>
                 </div>
             </div>
             <div class="side-panel">
                 <h3><div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>Простые напоминания</h3>
                 <div class="side-list">
-                    <div class="side-item"><div class="bullet"></div><span>Начни с одного дела, а не со всего сразу.</span></div>
-                    <div class="side-item"><div class="bullet"></div><span>Пропущенный день — не провал, если следующий не пропущен.</span></div>
-                    <div class="side-item"><div class="bullet"></div><span>Не обязательно быть продуктивным — достаточно быть живым.</span></div>
-                    <div class="side-item"><div class="bullet"></div><span>Прогресс не всегда видно сразу, но он есть.</span></div>
-                    <div class="side-item"><div class="bullet"></div><span>Маленькая привычка сегодня лучше большой цели на потом.</span></div>
+                    <div class="side-item" data-block="tip-a"><div class="bullet"></div><span>Начни с одного дела, а не со всего сразу.</span></div>
+                    <div class="side-item" data-block="tip-b"><div class="bullet"></div><span>Пропущенный день — не провал, если следующий не пропущен.</span></div>
+                    <div class="side-item" data-block="tip-c"><div class="bullet"></div><span>Не обязательно быть продуктивным — достаточно быть живым.</span></div>
+                    <div class="side-item" data-block="tip-d"><div class="bullet"></div><span>Прогресс не всегда видно сразу, но он есть.</span></div>
+                    <div class="side-item" data-block="tip-e"><div class="bullet"></div><span>Маленькая привычка сегодня лучше большой цели на потом.</span></div>
                 </div>
             </div>
         </section>
@@ -93,6 +93,40 @@
             (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
             ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
             (document,screen)</script><!--/LiveInternet-->
+        </span>
+        <span class="li-wrap">
+            <!-- Top100 (Kraken) Counter -->
+            <script>
+                (function (w, d, c) {
+                (w[c] = w[c] || []).push(function() {
+                    var options = {
+                        project: 7752728,
+                        attributes_dataset: [ "data-block" ],
+                        trackHashes: true,
+                        user_id: null,
+                    };
+                    try {
+                        w.top100Counter = new top100(options);
+                    } catch(e) { }
+                });
+                var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src =
+                (d.location.protocol == "https:" ? "https:" : "http:") +
+                "//st.top100.ru/top100/top100.js";
+
+                if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+            })(window, document, "_top100q");
+            </script>
+            <noscript>
+              <img src="//counter.rambler.ru/top100.cnt?pid=7752728" alt="Топ-100" />
+            </noscript>
+            <!-- END Top100 (Kraken) Counter -->
         </span>
     </footer>
 
@@ -125,6 +159,9 @@
         document.getElementById('nextBtn').addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % quotes.length;
             showQuote(currentIndex);
+            if (window.top100Counter && typeof window.top100Counter.reachGoal === 'function') {
+                window.top100Counter.reachGoal('next_quote');
+            }
         });
         document.getElementById('randomBtn').addEventListener('click', () => {
             let newIndex;
@@ -132,6 +169,9 @@
             while (newIndex === currentIndex && quotes.length > 1);
             currentIndex = newIndex;
             showQuote(currentIndex);
+            if (window.top100Counter && typeof window.top100Counter.reachGoal === 'function') {
+                window.top100Counter.reachGoal('random_quote');
+            }
         });
     </script>
 </body>
