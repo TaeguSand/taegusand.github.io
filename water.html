@@ -83,53 +83,39 @@
 
     <footer>
         <span>День · трекер привычек · 2026 · <a href="about.html">О проекте</a></span>
+        
+        <!-- LiveInternet -->
         <span class="li-wrap">
-            <!--LiveInternet counter--><a href="https://www.liveinternet.ru/click"><img id="licntFA1E" width="88" height="31" style="border:0; display:block;"
-            title="LiveInternet: показано число просмотров и посетителей за 24 часа"
-            src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
-            alt=""/></a><script>(function(d,s){d.getElementById("licntFA1E").src=
-            "https://counter.yadro.ru/hit?t52.13;r"+escape(d.referrer)+
-            ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+
-            (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+
-            ";h"+escape(d.title.substring(0,150))+";"+Math.random()})
-            (document,screen)</script><!--/LiveInternet-->
+            <a href="https://www.liveinternet.ru/click" target="_blank">
+                <img src="https://counter.yadro.ru/hit?t52.13;r;s1536*864*24;uhttps%3A//taegusand.github.io/;h%u0414%u0435%u043D%u044C%20%u2014%20%u0442%u0440%u0435%u043A%u0435%u0440%20%u043F%u0440%u0438%u0432%u044B%u0447%u0435%u043A;0.123456789" 
+                alt="LiveInternet" width="88" height="31" style="border:0; display:block;">
+            </a>
         </span>
+
+        <!-- Sber Ads (Рамблер/Топ-100) -->
         <span class="li-wrap">
-            <!-- Top100 (Kraken) Counter -->
+            <a href="https://ads.sber.ru/stat/projects" target="_blank">
+                <img src="https://top100.rambler.ru/top100.cnt?pid=7752728" width="88" height="31" style="border:0; display:block;" alt="Sber Ads">
+            </a>
             <script>
                 (function (w, d, c) {
                 (w[c] = w[c] || []).push(function() {
-                    var options = {
-                        project: 7752728,
-                        attributes_dataset: [ "data-block" ],
-                        trackHashes: true,
-                        user_id: null,
-                    };
-                    try {
-                        w.top100Counter = new top100(options);
-                    } catch(e) { }
+                    var options = { project: 7752728, attributes_dataset: [ "data-block" ], trackHashes: true, user_id: null };
+                    try { w.top100Counter = new top100(options); } catch(e) { }
                 });
-                var n = d.getElementsByTagName("script")[0],
-                s = d.createElement("script"),
-                f = function () { n.parentNode.insertBefore(s, n); };
-                s.type = "text/javascript";
-                s.async = true;
-                s.src =
-                (d.location.protocol == "https:" ? "https:" : "http:") +
-                "//st.top100.ru/top100/top100.js";
-
-                if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else { f(); }
-            })(window, document, "_top100q");
+                var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript"; s.async = true;
+                s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//st.top100.ru/top100/top100.js";
+                if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
+                })(window, document, "_top100q");
             </script>
-            <noscript>
-              <img src="//counter.rambler.ru/top100.cnt?pid=7752728" alt="Топ-100" />
-            </noscript>
-            <!-- END Top100 (Kraken) Counter -->
         </span>
+
+        <!-- MyTracker (Top.Mail.Ru) -->
         <span class="li-wrap">
-            <!-- Top.Mail.Ru counter -->
+            <a href="https://tracker.my.com/" target="_blank">
+                <img src="https://top-fwz1.mail.ru/counter?id=3800853;js=na" width="88" height="31" style="border:0; display:block;" alt="MyTracker">
+            </a>
             <script type="text/javascript">
             var _tmr = window._tmr || (window._tmr = []);
             _tmr.push({id: "3800853", type: "pageView", start: (new Date()).getTime()});
@@ -141,8 +127,6 @@
               if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); }
             })(document, window, "tmr-code");
             </script>
-            <noscript><div><img src="https://top-fwz1.mail.ru/counter?id=3800853;js=na" style="position:absolute;left:-9999px;" alt="Top.Mail.Ru" /></div></noscript>
-            <!-- /Top.Mail.Ru counter -->
         </span>
     </footer>
 
