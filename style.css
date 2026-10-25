@@ -167,13 +167,7 @@ footer {
 footer a { color: var(--accent); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 footer .li-wrap { display: inline-flex; align-items: center; }
-
-/* ДОБАВЛЕНО ПРАВИЛО ДЛЯ КАРТИНОК В ФУТЕРЕ */
-footer img {
-    display: block;
-    border: 0;
-    max-height: 31px;
-}
+footer img { display: block; border: 0; max-height: 31px; }
 
 @media (max-width: 640px) {
     .hero { padding: 3.5rem 1.3rem 2rem; }
